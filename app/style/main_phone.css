@@ -1,0 +1,29 @@
+body {
+    margin: 0px;
+}
+
+#board {
+}
+
+#cards_container {
+    border: solid grey 2px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5%;
+    width: 80%;
+
+}
+
+.card {
+    border-radius: 5px;
+    min-width: 48px;
+
+    background: #2e3d49;
+}
+
+/* Card Ratio of 1:1 */
+.card:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
