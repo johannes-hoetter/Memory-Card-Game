@@ -8,10 +8,6 @@ let cardValues = ['bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 't
                   'bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup'];
 
 function setup() {
-    //add an event listener to the reset button
-    const resetButton = document.getElementById('reset');
-    //resetButton.addEventListener('click', reset());
-
     //prepare the cards to be useable (map values, add functionality)
     activateCards();
 
@@ -36,6 +32,9 @@ function activateCards() {
             if (!openedCards.includes(cards[i]) && !matchedCards.includes(cards[i])) {
                 openedCards.push(cards[i]);
                 cards[i].classList.add('open');
+                const icon = cards[i].childNodes[0];
+                icon.classList.add('open');
+                console.log(icon);
             }
 
             if (openedCards.length === 2) {
@@ -44,7 +43,14 @@ function activateCards() {
                 alert("Please don't open more than 2 cards at once");
                 for (let i = 0; i < openedCards.length; ++i) {
                     openedCards[i].classList.remove('open');
+                    const icon = openedCards[i].childNodes[0];
+                    icon.classList.remove('open');
                 }
+            }
+
+            //game is over
+            if (matchedCards.length == 16) {
+                getEndScreen();
             }
         });
     }
@@ -60,6 +66,13 @@ function checkMatch() {
     if (card1.innerHTML === card2.innerHTML) {
         isMatch = true;
         matchedCards.push(...openedCards);
+        card1.classList.add('match');
+        const icon1 = card1.childNodes[0];
+        icon1.classList.add('match');
+        card2.classList.add('match');
+        const icon2 = card2.childNodes[0];
+        icon2.classList.add('match');
+
     }
     setTimeout(flipBack, 500);
     return isMatch;
@@ -69,23 +82,22 @@ function checkMatch() {
 function flipBack() {
     const [card1, card2] = openedCards;
     card1.classList.remove('open');
+    const icon1 = card1.childNodes[0];
+    icon1.classList.remove('open');
+
     card2.classList.remove('open');
+    const icon2 = card2.childNodes[0];
+    icon2.classList.remove('open');
     openedCards = [];
 }
 
 
-function reset() {
-    //Delete stats from old round
-    rounds = 0;
-    initializeStatus();
-    openedCards = [];
-    matchedCards = [];
-
-    //initialize cards
-    activateCards();
+function getEndScreen() {
+    const rating = document.getElementById('rating');
+    const endscreenUrl = window.location.href.split('app.html')[0] + 'endscreen.html';
+    sessionStorage.setItem('rating', rating.innerHTML)
+    window.location.href = endscreenUrl;
 }
-
-
 
 
 //when the DOM is fully loaded
