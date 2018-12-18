@@ -6,6 +6,10 @@ h1 {
     text-align: center;
 }
 
+td {
+    text-align: center;
+}
+
 .text {
     font-family: 'Poppins', sans-serif;
 }
@@ -14,8 +18,8 @@ h1 {
 
     margin-left: auto;
     margin-right: auto;
-    padding: 3%;
-    width: 80%;
+    padding: 2%;
+    width: 70%;
 
     border-spacing: 10px; /*workaround for margin not showing */
     border-collapse: separate;
@@ -38,11 +42,17 @@ h1 {
 .card:before{
     content: "";
     display: block;
-    padding-top: 100%;
+    padding-top: 50%;
 }
 
 .card.open {
     transform: rotateY(0);
     background: red;
     cursor: default;
+}
+
+.icon{
+    color:white;
+    text-align: center;
+    vertical-align: bottom;
 }
