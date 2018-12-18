@@ -94,8 +94,10 @@ function flipBack() {
 
 function getEndScreen() {
     const rating = document.getElementById('rating');
+    const num_moves = document.getElementById('num_moves');
     const endscreenUrl = window.location.href.split('app.html')[0] + 'endscreen.html';
-    sessionStorage.setItem('rating', rating.innerHTML)
+    sessionStorage.setItem('rating', rating.innerHTML);
+    sessionStorage.setItem('num_moves', num_moves.innerHTML);
     window.location.href = endscreenUrl;
 }
 

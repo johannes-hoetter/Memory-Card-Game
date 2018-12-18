@@ -81,3 +81,28 @@ td {
 .icon.match {
     visibility: visible;
 }
+
+.won {
+    color: #4db366;
+}
+
+#play_again {
+    margin: 0 auto;
+
+    border: 2px solid #4db366;
+    border-radius: 5px;
+    color: white;
+
+    display: inline-block;
+    line-height: 3em;
+    padding: 0 1em;
+    background: #40bf60;
+    background-clip: padding-box;
+}
+
+.button_holder {
+    margin-top: 30px;
+    text-align: center;
+}
+
+

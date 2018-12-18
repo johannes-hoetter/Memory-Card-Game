@@ -18,10 +18,13 @@
 </head>
 <body>
 
-    <div>
-        <h1 class="text"> YOU WON! </h1>
-        <span id="rating"></span>
-        <button type="button" id="play_again">Play again!</button>
+    <div class="endscreen">
+        <h1 class="text"> Congratulations, you won! <i class="won far fa-thumbs-up"></i></h1>
+        <h3 class="text">It took you <span id="num_moves"></span> Moves to finish the Game,
+        resulting in a Rating of <span id="rating"></span></h3>
+        <div class="button_holder">
+            <button type="button" id="play_again">Play again!</button>
+        </div>
     </div>
 
     <script src="scripts/endscreen.js"></script>
