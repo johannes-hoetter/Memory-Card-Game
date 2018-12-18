@@ -40,11 +40,13 @@ function activateCards() {
                 cards[i].classList.add('open');
                 const icon = cards[i].childNodes[0];
                 icon.classList.add('open');
+                icon.classList.remove('wrong');
                 console.log(icon);
             }
 
             if (openedCards.length === 2) {
-                console.log(checkMatch());
+                checkMatch();
+
             } else if (openedCards.length > 2) {
                 alert("Please don't open more than 2 cards at once");
                 for (let i = 0; i < openedCards.length; ++i) {
@@ -67,21 +69,25 @@ function checkMatch() {
     console.log(openedCards);
     updateStatus();
     const [card1, card2] = openedCards;
-    let isMatch = false;
+    const icon1 = card1.childNodes[0];
+    const icon2 = card2.childNodes[0];
     console.log(card1.innerHTML, card2.innerHTML);
     if (card1.innerHTML === card2.innerHTML) {
-        isMatch = true;
-        matchedCards.push(...openedCards);
+        card1.classList.add('right');
+        icon1.classList.add('right');
+        card2.classList.add('right');
+        icon2.classList.add('right');
+
+
         card1.classList.add('match');
-        const icon1 = card1.childNodes[0];
         icon1.classList.add('match');
         card2.classList.add('match');
-        const icon2 = card2.childNodes[0];
         icon2.classList.add('match');
-
+    } else {
+        icon1.classList.add('wrong');
+        icon2.classList.add('wrong');
     }
     setTimeout(flipBack, 500);
-    return isMatch;
 }
 
 
