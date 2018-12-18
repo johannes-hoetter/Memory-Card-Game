@@ -31,8 +31,7 @@ function activateCards() {
     // 1. add card values
     // 2. add an event listener for each card
     for (let i = 0; i < cards.length; ++i) {
-        //add the card value
-        cards[i].innerHTML = `<i class="icon fas fa-${cardValues[i]} fa-3x"></i>`;
+        cards[i].innerHTML = `<i class="icon fas fa-${cardValues[i]} fa-2x"></i>`;
 
         //add an event listener to turn the card around
         cards[i].addEventListener('click', function () {
