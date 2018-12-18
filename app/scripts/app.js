@@ -30,6 +30,7 @@ function activateCards() {
     //prepare the cards:
     // 1. add card values
     // 2. add an event listener for each card
+    // 3. check for game logic
     for (let i = 0; i < cards.length; ++i) {
         cards[i].innerHTML = `<i class="icon fas fa-${cardValues[i]} fa-2x"></i>`;
 
@@ -41,12 +42,11 @@ function activateCards() {
                 const icon = cards[i].childNodes[0];
                 icon.classList.add('open');
                 icon.classList.remove('wrong');
-                console.log(icon);
             }
 
+            //check for game logic
             if (openedCards.length === 2) {
                 checkMatch();
-
             } else if (openedCards.length > 2) {
                 alert("Please don't open more than 2 cards at once");
                 for (let i = 0; i < openedCards.length; ++i) {
@@ -66,23 +66,24 @@ function activateCards() {
 
 
 function checkMatch() {
-    console.log(openedCards);
     updateStatus();
     const [card1, card2] = openedCards;
     const icon1 = card1.childNodes[0];
     const icon2 = card2.childNodes[0];
-    console.log(card1.innerHTML, card2.innerHTML);
     if (card1.innerHTML === card2.innerHTML) {
+        //will be overwritten
         card1.classList.add('right');
         icon1.classList.add('right');
         card2.classList.add('right');
         icon2.classList.add('right');
 
-
         card1.classList.add('match');
         icon1.classList.add('match');
         card2.classList.add('match');
         icon2.classList.add('match');
+
+        matchedCards.push(card1);
+        matchedCards.push(card2);
     } else {
         icon1.classList.add('wrong');
         icon2.classList.add('wrong');
