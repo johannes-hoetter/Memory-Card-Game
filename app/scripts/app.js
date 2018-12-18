@@ -8,6 +8,13 @@ let cardValues = ['bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 't
                   'bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup'];
 
 function setup() {
+    const resetButton = document.getElementById('reset');
+    resetButton.addEventListener('click', function() {
+        if (confirm("Reset current game?")) {
+            window.location.href = window.location.href.split('app.html')[0] + 'app.html';
+        }
+    });
+
     //prepare the cards to be useable (map values, add functionality)
     activateCards();
 
