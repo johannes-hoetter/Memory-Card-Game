@@ -3,13 +3,26 @@ const cards = document.getElementsByClassName('card');
 let openedCards = [];
 let matchedCards = [];
 let rounds = 0;
+//each value exists twice to create pair-wise cards
+let cardValues = ['bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup',
+                  'bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup'];
 
 function setup() {
+    //add an event listener to the reset button
+    const resetButton = document.getElementById('reset');
+    //resetButton.addEventListener('click', reset());
 
-    //each value exists twice to create pair-wise cards
-    let cardValues = ['bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup',
-                      'bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup'];
-    cardValues = shuffle(cardValues); //contains the values for each card
+    //prepare the cards to be useable (map values, add functionality)
+    activateCards();
+
+    //initialize the status
+    initializeStatus();
+}
+
+
+function activateCards() {
+    //contains the values for each card
+    cardValues = shuffle(cardValues);
 
     //prepare the cards:
     // 1. add card values
@@ -27,8 +40,7 @@ function setup() {
 
             if (openedCards.length === 2) {
                 console.log(checkMatch());
-            }
-            if (openedCards.length > 2) {
+            } else if (openedCards.length > 2) {
                 alert("Please don't open more than 2 cards at once");
                 for (let i = 0; i < openedCards.length; ++i) {
                     openedCards[i].classList.remove('open');
@@ -36,16 +48,11 @@ function setup() {
             }
         });
     }
-
-    //initialize the status
-    const rating = document.getElementById('rating')
-    rating.innerHTML = `<i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>`
 }
 
 
 function checkMatch() {
+    console.log(openedCards);
     updateStatus();
     const [card1, card2] = openedCards;
     let isMatch = false;
@@ -54,19 +61,65 @@ function checkMatch() {
         isMatch = true;
         matchedCards.push(...openedCards);
     }
-    setTimeout(back, 500);
+    setTimeout(flipBack, 500);
     return isMatch;
-
 }
 
-function back() {
+
+function flipBack() {
     const [card1, card2] = openedCards;
     card1.classList.remove('open');
     card2.classList.remove('open');
     openedCards = [];
 }
 
+
+function reset() {
+    //Delete stats from old round
+    rounds = 0;
+    initializeStatus();
+    openedCards = [];
+    matchedCards = [];
+
+    //initialize cards
+    activateCards();
+}
+
+
+
+
+//when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function(event)
+{
+    setup();
+});
+
+
+
+
+//-------------------------------------------------- Helper Functions --------------------------------------------------
+
+//taken from https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+function shuffle(array) {
+    var j, x, i;
+    for (i = array.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = array[i];
+        array[i] = array[j];
+        array[j] = x;
+    }
+    return array;
+}
+
+function initializeStatus() {
+    const rating = document.getElementById('rating')
+    rating.innerHTML = `<i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>`
+}
+
 function updateStatus() {
+    //update the status of the performance of the player based on the number of rounds
     rounds += 1;
     const num_moves = document.getElementById('num_moves');
     num_moves.innerHTML = rounds;
@@ -106,35 +159,4 @@ function updateStatus() {
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>`
     }
-}
-
-
-//when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function(event)
-{
-    setup();
-});
-
-
-
-
-
-
-
-
-
-
-
-//-------------------------------------------------- Helper Functions --------------------------------------------------
-
-//taken from https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
-function shuffle(array) {
-    var j, x, i;
-    for (i = array.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = array[i];
-        array[i] = array[j];
-        array[j] = x;
-    }
-    return array;
 }

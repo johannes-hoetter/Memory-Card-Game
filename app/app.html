@@ -19,38 +19,45 @@
 
     <h1 class="text">Concentration</h1>
     <div>
-        <h3>
-            <span id="rating"></span> <span id="num_moves">0</span> Moves
-        </h3>
-    </div>
+        <div class="text container">
+            <span id="status" class="text">
+                <span id="rating"></span> <span id="num_moves">0</span> Moves
+            </span>
+            <span class="whitespaces">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            </span>
+            <span id="reset"><i class="fas fa-undo"></i></span>
+        </div>
 
-    <!-- Board -->
-    <table id="cards_container">
-        <tr>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-        </tr>
-        <tr>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-        </tr>
-        <tr>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-        </tr>
-        <tr>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-            <td class="card square"></td>
-        </tr>
-    </table>
+        <!-- Board -->
+        <table id="board">
+            <tr>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+            </tr>
+            <tr>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+            </tr>
+            <tr>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+            </tr>
+            <tr>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+                <td class="card square"></td>
+            </tr>
+        </table>
+        </div>
 
     <script src="scripts/app.js"></script>
 </body>
