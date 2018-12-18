@@ -7,6 +7,10 @@ let rounds = 0;
 let cardValues = ['bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup',
                   'bus', 'car', 'motorcycle', 'shuttle-van', 'taxi', 'truck', 'truck-monster', 'truck-pickup'];
 
+let start = true;
+let startTime = 0;
+let endTime = 0;
+
 function setup() {
     const resetButton = document.getElementById('reset');
     resetButton.addEventListener('click', function() {
@@ -36,6 +40,10 @@ function activateCards() {
 
         //add an event listener to turn the card around
         cards[i].addEventListener('click', function () {
+            if (start) {
+                start = false;
+                startTime = performance.now();
+            }
             if (!openedCards.includes(cards[i]) && !matchedCards.includes(cards[i])) {
                 openedCards.push(cards[i]);
                 cards[i].classList.add('open');
@@ -58,6 +66,7 @@ function activateCards() {
 
             //game is over
             if (matchedCards.length == 16) {
+                endTime = performance.now();
                 getEndScreen();
             }
         });
@@ -111,6 +120,7 @@ function getEndScreen() {
     const endscreenUrl = window.location.href.split('app.html')[0] + 'endscreen.html';
     sessionStorage.setItem('rating', rating.innerHTML);
     sessionStorage.setItem('num_moves', num_moves.innerHTML);
+    sessionStorage.setItem('time_needed', endTime - startTime);
     window.location.href = endscreenUrl;
 }
 
